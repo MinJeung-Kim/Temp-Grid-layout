@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import styles from "./styles.module.css";
 import { useIntersectionObserver } from "../../hooks/useIntersectionObserver";
 
@@ -8,7 +8,7 @@ interface SlideProps {
   setCurrentSlide: (index: number) => void;
 }
 
-const Slide: React.FC<SlideProps> = ({ content, index, setCurrentSlide }) => {
+export default function Slide({ content, index, setCurrentSlide }: SlideProps) {
   const [ref, isIntersecting] = useIntersectionObserver({ threshold: 0.5 });
 
   useEffect(() => {
@@ -25,6 +25,4 @@ const Slide: React.FC<SlideProps> = ({ content, index, setCurrentSlide }) => {
       {content}
     </div>
   );
-};
-
-export default Slide;
+}

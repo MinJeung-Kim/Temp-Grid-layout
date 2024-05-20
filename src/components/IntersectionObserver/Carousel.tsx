@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import styles from "./styles.module.css";
+import { useState } from "react";
 import Slide from "./Slide";
+import styles from "./styles.module.css";
 
 const slides = [
   { id: 1, content: "Child One" },
@@ -23,18 +23,18 @@ export default function Carousel() {
             setCurrentSlide={setCurrentSlide}
           />
         ))}
+        <div className={styles.indicators}>
+          {slides.map((_, index) => (
+            <span
+              key={index}
+              className={`${styles.dot} ${
+                index === currentSlide ? styles.activeDot : ""
+              }`}
+            />
+          ))}
+        </div>
       </main>
       <footer className={styles.footer}>This is the Footer</footer>
-      <div className={styles.indicators}>
-        {slides.map((_, index) => (
-          <span
-            key={index}
-            className={`${styles.dot} ${
-              index === currentSlide ? styles.activeDot : ""
-            }`}
-          />
-        ))}
-      </div>
     </div>
   );
 }
