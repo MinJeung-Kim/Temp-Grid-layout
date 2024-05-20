@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import styles from "./styles.module.css";
-import { useIntersectionObserver } from "../../hooks/useIntersectionObserver";
+import { useCarouselIndicator } from "../../../hooks/useCarouselIndicator";
 
 interface SlideProps {
   content: string;
@@ -9,7 +9,7 @@ interface SlideProps {
 }
 
 export default function Slide({ content, index, setCurrentSlide }: SlideProps) {
-  const [ref, isIntersecting] = useIntersectionObserver({ threshold: 0.5 });
+  const [ref, isIntersecting] = useCarouselIndicator({ threshold: 0.5 });
 
   useEffect(() => {
     if (isIntersecting) {
