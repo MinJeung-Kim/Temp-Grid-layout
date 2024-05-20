@@ -1,18 +1,17 @@
 import { useEffect, useRef, useState } from "react";
 
 export function useIntersectionObserver(
-  rootMargin: string = "0px"
+  options: IntersectionObserverInit
 ): [React.RefObject<HTMLDivElement>, boolean] {
   const [isIntersecting, setIsIntersecting] = useState<boolean>(false);
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
         setIsIntersecting(entry.isIntersecting);
-      },
-      { rootMargin }
-    );
+      });
+    }, options);
 
     const currentElement = ref.current;
     if (currentElement) {
@@ -24,7 +23,7 @@ export function useIntersectionObserver(
         observer.disconnect();
       }
     };
-  }, [rootMargin]);
+  }, [options]);
 
   return [ref, isIntersecting];
 }
