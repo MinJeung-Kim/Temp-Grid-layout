@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "./styles.module.css";
 
 export default function IntersectionObserver3() {
@@ -13,38 +13,37 @@ export default function IntersectionObserver3() {
       { rootMargin: "-300px" }
     );
 
-    if (ref.current) {
-      observer.observe(ref.current);
+    const currentElement = ref.current; // 현재 엘리먼트 캐시
+    if (currentElement) {
+      observer.observe(currentElement);
     }
 
     return () => {
-      observer.disconnect();
+      if (currentElement) {
+        observer.disconnect();
+      }
     };
+    // 컴포넌트 마운트 시 한 번만 실행
   }, []);
 
   useEffect(() => {
+    // isIntersecting 상태에 따라 클래스를 토글
     if (ref.current) {
       const children = ref.current.querySelectorAll("div");
-      if (isIntersecting) {
-        children.forEach((el) => {
-          el.classList.add(`${styles.slide_in}`);
-        });
-      } else {
-        children.forEach((el) => {
-          el.classList.remove(`${styles.slide_in}`);
-        });
+      for (const el of children) {
+        el.classList.toggle(styles.slide_in, isIntersecting);
       }
     }
   }, [isIntersecting]);
 
   return (
     <div className={styles.app}>
-      <header>This is the Header</header>
+      <header className={styles.header}>This is the Header</header>
       <main ref={ref}>
         <div className={styles.child_one}>Child One</div>
         <div className={styles.child_two}>Child Two</div>
       </main>
-      <footer>This is the Footer</footer>
+      <footer className={styles.footer}>This is the Footer</footer>
     </div>
   );
 }
