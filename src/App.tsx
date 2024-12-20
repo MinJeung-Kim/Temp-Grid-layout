@@ -1,12 +1,12 @@
-// import GridLayout from "./components/GridLayout/GridLayout";
+import GridLayout from "./components/GridLayout/GridLayout";
 // import Carousel from "./components/IntersectionObserver/CarouselIndicator/Carousel";
-import IntersectionObserver from "./components/IntersectionObserver/IntersectionObserver";
+// import IntersectionObserver from "./components/IntersectionObserver/IntersectionObserver";
 
 function App() {
   return (
-    // <GridLayout />
+    <GridLayout />
     // <Carousel />
-    <IntersectionObserver />
+    // <IntersectionObserver />
   );
 }
 
